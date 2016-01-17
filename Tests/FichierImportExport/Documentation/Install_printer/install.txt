@@ -1,0 +1,6 @@
+Pour installer l'extension printer, il faut copier/coller le fichier php_printer.dll dans le dossier "C:\wamp\bin\php\php5.5.12\ext\".
+
+Puis il faut activer l'extension dans le php.ini de wamp en ajoutant cette ligne: "extension=php_printer.dll".
+
+
+On redémarre Wampserver et le tour est joué.
