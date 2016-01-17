@@ -1,3 +1,4 @@
+<meta charset="utf-8" />
 <?php
 require_once 'Classes/PHPExcel.php';
 require_once 'Classes/PHPExcel/IOFactory.php';
