@@ -1,0 +1,73 @@
+############## INSTALLATION DE SYMFONY2 #####################
+
+- Vérifiez si PHP est installé en console :  php -v
+
+Variable d'environnement à MAJ si besoin  :  ex(C:\wamp\bin\php\php5.5.12;)
+
+- Téléchargez symfony.phar dans le dossier : ex(C:\wamp\www)
+
+Adresse suivante : http://symfony.com/installer
+
+- Lancez l'installation CMD : php symfony.phar new Symfony
+
+- Info utile si en mode DEV la mise en forme d'une page d'erreur est mauvaise
+
+Dans le répertoire Symfony depuis le CMD : php bin/console assets:install
+
+- Pour créer un Bundle dans le répertoire Symfony depuis le CMD : php bin/console generate:bundle
+
+Bundle namespace: par convention => RACINE|Nomdubundle|Bundle(obligatoire)
+Bundle name: par défaut
+Target directory: par défaut
+Configuration format: au choix (ex: yml)
+structure: par défaut
+Entrée x fois jusqu'à "generated code !"
+
+- Nettoyage des éléments générés par Symfony2:
+
+*Controller/DefautController.php
+*Resources/views/Default
+*La route "xxxx_xxxxx_homepage" dans Resources/config/routing.yml
+*Le dossier AppBundle dans src/AppBundle
+*La ligne 19 du fichier app/AppKernel.php, celle qui active le bundle: new AppBundle\AppBundle();
+*Les lignes 5 à 7 du fichier app/config/routing.yml, celles qui importent le fichier de route 
+du bundle AppBundle (app: resource: "@AppBundle/Controller/" type: annotation" ).
+
+- Nettoyage du cache en mode DEV depuis le CMD: php bin/console cache:clear
+
+- Installer Composer et Git
+
+### COMPOSER ###
+
+Téléchargement depuis le CMD à la racine de Symfony:
+
+	php -r "eval('?>'.file_get_contents('http://getcomposer.org/installer'));"
+
+Téléchargement depuis le navigateur:
+
+	http://getcomposer.org/installer (fichier "installer" à mettre à la racine de symfony)
+
+Vérifiez que tout est OK depuis le CMD: php composer.phar --version (Composer version xxxx)
+
+Si besoin de le mettre à jour toujours depuis le CMD: php composer.phar self-update (Updating to version xxx.)
+
+### GIT ###
+
+Téléchargement ici : https://git-for-windows.github.io/
+
+Installation suivant => suivant etc....
+
+Variable d'environnement à MAJ: (ex: C:\Program Files\Git\bin;C:\Program Files\Git\mingw64\bin;)
+
+INSTALLER UN BUNDLE AVEC COMPOSER
+
+Ouvrir le fichier "composer.json" situé à la racine de Symfony puis rajouter dans "require": {"twig/extensions": "~1.0"}
+
+Ou au choix ici suivant vos besoins: https://packagist.org/packages/twig/extensions
+
+! Attention à vérifier si votre version de PHP et de Symfony sont compatibles
+
+Sauvegarder le fichier Json et dans le CMD saisissez la commande :   php composer.phar update
+
+le contenu du dossier "Symfony/vendor" a été mis à jour !
+
