@@ -1,0 +1,367 @@
+############## INSTALLATION DE SYMFONY2 #####################
+
+- Vérifiez si PHP est installé en console :  php -v
+
+Variable d'environnement à MAJ si besoin  :  ex(C:\wamp\bin\php\php5.5.12;)
+
+- Téléchargez symfony.phar dans le dossier : ex(C:\wamp\www)
+
+Adresse suivante : http://symfony.com/installer
+
+- Lancez l'installation CMD : php symfony.phar new Symfony
+
+- Info utile si en mode DEV la mise en forme d'une page d'erreur est mauvaise
+
+Dans le répertoire Symfony depuis le CMD : php bin/console assets:install
+
+- Pour créer un Bundle dans le répertoire Symfony depuis le CMD : php bin/console generate:bundle
+
+Bundle namespace: par convention => RACINE|Nomdubundle|Bundle(obligatoire)
+Bundle name: par défaut
+Target directory: par défaut
+Configuration format: au choix (ex: yml)
+structure: par défaut
+Entrée x fois jusqu'à "generated code !"
+
+- Nettoyage des éléments générés par Symfony2:
+
+*Controller/DefautController.php
+*Resources/views/Default
+*La route "xxxx_xxxxx_homepage" dans Resources/config/routing.yml
+*Le dossier AppBundle dans src/AppBundle
+*La ligne 19 du fichier app/AppKernel.php, celle qui active le bundle: new AppBundle\AppBundle();
+*Les lignes 5 à 7 du fichier app/config/routing.yml, celles qui importent le fichier de route 
+du bundle AppBundle (app: resource: "@AppBundle/Controller/" type: annotation" ).
+
+- Nettoyage du cache en mode DEV depuis le CMD: php bin/console cache:clear
+
+- Installer Composer et Git
+
+### COMPOSER ###
+
+Téléchargement depuis le CMD à la racine de Symfony:
+
+	php -r "eval('?>'.file_get_contents('http://getcomposer.org/installer'));"
+
+Téléchargement depuis le navigateur:
+
+	http://getcomposer.org/installer (fichier "installer" à mettre à la racine de symfony)
+
+Vérifiez que tout est OK depuis le CMD: php composer.phar --version (Composer version xxxx)
+
+Si besoin de le mettre à jour toujours depuis le CMD: php composer.phar self-update (Updating to version xxx.)
+
+### GIT ###
+
+Téléchargement ici : https://git-for-windows.github.io/
+
+Installation suivant => suivant etc....
+
+Variable d'environnement à MAJ: (ex: C:\Program Files\Git\bin;C:\Program Files\Git\mingw64\bin;)
+
+INSTALLER UN BUNDLE AVEC COMPOSER
+
+Ouvrir le fichier "composer.json" situé à la racine de Symfony puis rajouter dans "require": {"twig/extensions": "~1.0"}
+
+Ou au choix ici suivant vos besoins: https://packagist.org/packages/twig/extensions
+
+! Attention à vérifier si votre version de PHP et de Symfony sont compatibles
+
+Sauvegarder le fichier Json et dans le CMD saisissez la commande :   php composer.phar update
+
+le contenu du dossier "Symfony/vendor" a été mis à jour !
+
+### Générer une entité avec Doctrine ###
+
+A l'aide du CMD dans le répertoire racine du projet :
+
+	php bin/console generate:doctrine:entity
+
+*Donnez lui un nom
+*Choisissez le format par défault [annotation]
+*Nom du premier champs
+*Puis le type de champs
+*Puis la longueur du champs
+** Répétez l'opération autant de fois que vous avez de champs.
+** Puis une fois terminé faites "Entrée" et choisissez "yes" pour générer pour créer un repository vide.
+
+### Matérialiser les tables en Base de données ###
+
+Avant tout vérifier le paramétrage dans : app/config/parameters.yml
+
+Tout ce qui commence par "database_" c'est à dire host, name , user etc....
+
+	Dans un premier temps il faut créer la Base de données à l'aide du CMD:
+
+		php bin/console doctrine:database:create 
+
+	Ensuite il faut générer la table:
+
+		php bin/console doctrine:schema:update --dump-sql (cette commande affiche la ou les requêtes qu'elle s'apprête à exécuter suite à une coparaison faite entre la base de données et nos entités)
+
+		php bin/console doctrine:schema:update --force (cette commande génère la ou les tables correspondantes à la requête précédente)
+
+Voilà, si tout c'est bien passé votre Base de données à une ou plusieurs nouvelle(s) table(s).
+
+### Créer les getter et les setter correspondant à un nouvel attribut de son entité ###
+
+*Ecrire son attribut à la main dans le fichier de l'entité correspondant
+
+exemple dans le fichier "C:\wamp\www\Symfony\src\FC\PlatformBundle\Entity\Advert"
+
+Placez y l'attribut suivant : 
+
+/**
+  *
+  * @ORM\Column(name="published", type="boolean")
+  */
+private $published = true;
+
+
+*Ensuite afin de générer automatiquement les setters et les getters dans le CMD :
+
+php bin/console doctrine:generate:entities FCPlatformBundle:Advert
+
+Explication:"php bin/console doctrine:generate:entities [nomdubundle]:[nomdel'entité]
+
+Et voilà vos setters et vos getters sont mis à jour.
+
+Conclusion: La commande entity génère une entité entière alors que entities génère en fonction du mapping existant.
+
+### Enregistrer ce nouveau schéma en Base de données ###
+
+Depuis le CMD :
+
+php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+Puis:
+
+php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+
+### Enregistrer ses entités avec l'EntityManager ###
+
+Le service doctrine est celui qui va nous permettre de gérer la persistance de nos objets depuis le contrôleur.
+
+	$doctrine = $this->get('doctrine');
+
+ou bien
+
+	$doctrine = $this->getDoctrine();
+
+
+Le service EntityManager de doctrine permet d'exécuter les requêtes SQL dans la Base de données.
+
+	$em = $this->getDoctrine()->getManager();
+
+ou bien
+
+	$em = $this->get('doctrine.orm.entity_manager');
+
+Les repositories sont des objets qui utilisent un EntityManager et qui est bien plus facile à utiliser. Il en existe un par entité, il faut donc toujours préciser l'entité concernée.
+
+	$em = $this->getDoctrine()->getManager();
+	$advertRepository = $em->getRepository('FCPlatformBundle:Advert');
+
+Précision: Il y a deux façons de spécifier l'entité voulue dans getRepository:
+
+	$em->getRepository('[chemincompletdel'entité]') ex: '[FC\PlatformBundle\Entity\Advert]'
+
+ou alors
+
+	$em->getRepository('[nomdubundle]:[nomdel'entité]') ex: '[FCPlatformBundle:Advert]'
+
+! Attention ce raccourci ne fonctionne que si vous avez mis vos entités dans le namespace:
+
+	ex: use FC\PlatformBundle\Entity\Advert;
+
+### Procédure d'enregistrement d'un objet en Base de données ###
+
+1) On créé l'entité objet
+
+	$entity = new Advert();
+
+2) On renseigne ses attributs
+
+	$entity->setTitle('-----');
+	$entity->setAuthor('--------');
+	etc......
+
+3) On récupère l'EntityManager
+
+	$entityManager = $this->getDoctrine()->getManager();
+
+4) On dit à Doctrine de persister l'entité
+
+	$entityManager->persist($entity);
+
+5) On dit à Doctrine d'exécuter les requêtes pour sauvegarder les entités précédemment persistées
+
+	$entityManager->flush();
+
+Et voilà le tour est joué, on peut maintenant récupérer l'id créé par exemple à l'aide de :
+
+	$entity->getId();
+
+### Effectuer une mise à jour d'un objet en Base de données ###
+
+$entityManager = $this->getDoctrine()->getManager();
+
+$entity = $entityManager->getRepository('FCPlatformBundle:Advert')->find(5);
+
+$entity->setDate(new \Datetime());
+
+$entity->flush();
+
+### Autres méthodes utiles de l'EntityManager ###
+
+clear() Annule tous les persist effectués
+
+ex: $entityManager->persist($advert);
+    $entityManager->persist($comment);
+    $entityManager->clear();
+    $entityManager->flush(); // N'exécutera rien car les deux persists sont annulés par le clear
+
+detach() Annule le persist effectué sur l'entité en argument
+
+ex: $entityManager->persist($advert);
+    $entityManager->persist($comment);
+    $entityManager->detach($advert);
+    $entityManager->flush(); // Enregistre $comment mais pas $advert
+
+contains() Retourne  true si l'entité donnée en argument a été persist
+
+ex: $entityManager->persist($avert);
+    var_dump($entityManager->contains($advert)); // Affiche true
+    var_dump($entityManager->contains($comment)); // Affiche false
+
+refresh() Met à jour l'entité donnée en argument dans l'état où elle est en Base de données
+
+ex: $advert->setTitle('Un nouveau titre');
+    $entityManager->refresh($advert);
+    var_dump($advert->getTitle()); // " Affiche un ancien titre "
+
+remove() Supprime l'entité donnée en argument de la base de données au prochain flush
+
+ex: $entityManager->remove($advert);
+    $entityManager->flush(); // Exécute un DELETE sur $advert
+
+### Procédure de sélection en Base de données ###
+
+1) On récupère le repository
+
+$repository = $this->getDoctrine()->getManager()->getRepository('FCPlatformBundle:Advert');
+
+2) On récupère l'entité correspondante à l'id $id
+
+$advert = $repository->find($id);
+
+Autre façon plus courte
+
+	$advert = $this->getDoctrine()->getManager()->find('FCPlatformBundle:Advert', $id);
+
+### Relation entre entités ###
+
+
+	## Relation OneToOne
+
+Créer une nouvelle entité 
+
+	php bin/console generate:doctrine:entity
+
+	*Donnez lui un nom
+	*Choisissez le format par défault [annotation]
+	*Nom du premier champs
+	*Puis le type de champs
+	*Puis la longueur du champs
+	** Répétez l'opération autant de fois que vous avez de champs.
+	** Puis une fois terminé faites "Entrée" et choisissez "yes" pour générer pour créer un repository vide.
+
+Puis mettez à jour la Base de données
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+	Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+Ensuite pour une entité advert en propriétaire et image en inverse par exemple
+
+Rajouter dans l'entité propriétaire Advert la liaison sous cette forme:
+
+/**
+  * @ORM\OneToOne(targetEntity="FC\PlatformBundle\Entity\Image", cascade={"persist"})
+  */
+private $image;
+
+
+Ensuite mettez à jour la Base de données: 
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+	Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+Vous pouvez voir dans la table Advert la clé étrangère image_id a été rajoutée !
+
+! Important  Par défaut une relation est facultative si vous voulez forcer la relation il faut ajouter dans Advert " @ORM\JoinColumn(nullable=false) " comme ceci:
+
+/**
+  * @ORM\OneToOne(targetEntity="FC\PlatformBundle\Entity\Image", cascade={"persist"})
+  * @ORM\JoinColumn(nullable=false)
+  */
+private $image;
+
+Ajoutez ensuite les getters et les setters à l'aide de la commande:
+
+php bin/console doctrine:generate:entities FCPlatformBundle:Image
+
+
+	## Relation ManyToOne
+
+Créer une nouvelle entité 
+
+	php bin/console generate:doctrine:entity
+
+	*Donnez lui un nom
+	*Choisissez le format par défault [annotation]
+	*Nom du premier champs
+	*Puis le type de champs
+	*Puis la longueur du champs
+	** Répétez l'opération autant de fois que vous avez de champs.
+	** Puis une fois terminé faites "Entrée" et choisissez "yes" pour générer pour créer un repository vide.
+
+Puis mettez à jour la Base de données
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+	Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+Ensuite pour une entité Application en propriétaire et une entité Advert en inverse par exemple
+
+Rajoutez dans l'entité propriétaire Application:
+
+/**
+ * @ORM\ManyToOne(targetEntity="FC\PlatformBundle\Entity\Advert")
+ * @ORM\JoinColumn(nullable=false)
+ */
+private $advert;
+
+ Ensuite mettez à jour la Base de données: 
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+	Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+Vous pouvez voir dans la table Application la clé étrangère advert_id a été rajoutée !	
+
+Ajoutez ensuite les getters et les setters à l'aide de la commande:
+
+php bin/console doctrine:generate:entities FCPlatformBundle:Application
+
+	## Relation ManyToMany	   
