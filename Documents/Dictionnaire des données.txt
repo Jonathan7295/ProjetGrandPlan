@@ -1,17 +1,56 @@
-identifiant_utilisateur
-nom_utilisateur
-prenom_utilisateur
-login_utilisateur
-password_utilisateur
-role_utilisateur
+identifiant_utilisateur entier 8
+nom_utilisateur varchar 30
+prenom_utilisateur varchar 30
+login_utilisateur varchar 20
+password_utilisateur varchar 20
+role_utilisateur varchar 20
+email_utilisateur varchar 100
 
-identifiant_oeuvre
-nom_oeuvre
-description_oeuvre
-position_salle_oeuvre
-son_video_oeuvre
-image_oeuvre
+id_utilisateur_tel entier 8
+num_utilisateur_tel entier 12
+libelle_utilisateur_tel varchar 50
 
-identifiant_exposition
-nom_exposition
-cycle_vie_exposition
+identifiant_oeuvre entier 8
+nom_fr_oeuvre varchar 50
+nom_en_oeuvre varchar 50
+nom_ru_oeuvre varchar 50
+nom_ch_oeuvre varchar 50
+nom_al_oeuvre varchar 50
+description_fr_oeuvre varchar 250
+description_en_oeuvre varchar 250
+description_ru_oeuvre varchar 250
+description_ch_oeuvre varchar 250
+description_al_oeuvre varchar 250
+position_salle_oeuvre entier 2
+son_oeuvre varchar 250
+video_oeuvre varchar 250
+image_oeuvre varchar 250
+type_oeuvre varchar 50
+nom_artiste varchar 50
+image_flashcode_oeuvre varchar 100
+etat_oeuvre boolean
+dimmension_largeur_oeuvre réel 4
+dimmension_hauteur_oeuvre réel 4
+dimmension_profondeur_oeuvre réel 4
+nombre_visite_oeuvre entier 8
+
+identifiant_exposition entier 8
+theme_fr_exposition varchar 50
+theme_en_exposition varchar 50
+theme_ru_exposition varchar 50
+theme_ch_exposition varchar 50
+theme_al_exposition varchar 50
+nom_fr_exposition varchar 50
+nom_en_exposition varchar 50
+nom_ru_exposition varchar 50
+nom_ch_exposition varchar 50
+nom_al_exposition varchar 50
+description_fr_auteur_exposition varchar 250
+description_en_auteur_exposition varchar 250
+description_ru_auteur_exposition varchar 250
+description_ch_auteur_exposition varchar 250
+description_al_auteur_exposition varchar 250
+cycle_vie_exposition varchar 50
+date_heure_debut_expostion datetime
+date_heure_fin_exposition datetime
+nombre_visite_exposition entier 8
