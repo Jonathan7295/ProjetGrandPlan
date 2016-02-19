@@ -1,0 +1,17 @@
+identifiant_utilisateur
+nom_utilisateur
+prenom_utilisateur
+login_utilisateur
+password_utilisateur
+role_utilisateur
+
+identifiant_oeuvre
+nom_oeuvre
+description_oeuvre
+position_salle_oeuvre
+son_video_oeuvre
+image_oeuvre
+
+identifiant_exposition
+nom_exposition
+cycle_vie_exposition
