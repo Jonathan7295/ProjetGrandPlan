@@ -10,8 +10,6 @@
 10 description_ch_oeuvre varchar 250
 11 description_al_oeuvre varchar 250
 12 position_salle_oeuvre entier 2
-13 son_oeuvre varchar 250
-14 video_oeuvre varchar 250
 15 image_oeuvre varchar 250
 16 type_oeuvre varchar 50
 17 nom_artiste varchar 50
@@ -51,6 +49,13 @@
 49 role_utilisateur varchar 20
 50 email_utilisateur varchar 100
 
-51 id_utilisateur_tel entier 8
 52 num_utilisateur_tel entier 12
 53 libelle_utilisateur_tel varchar 50
+
+54 id_son
+55 lien_son
+56 libelle_son
+
+57 id_video
+58 lien_video
+59 libelle_video
