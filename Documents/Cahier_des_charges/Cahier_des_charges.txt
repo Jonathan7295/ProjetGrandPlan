@@ -110,6 +110,7 @@ Un utilisateur a été modifié
 Authentification :
         Entrée : Saisir le mot de passe et l’identifiant
         Sortie : Connexions en cour (Après vérification du mot de passe et de l’identifiant)
+
 1. Spécification fonctionnel :
 Expositions: Il y aura un formulaire de création d’exposition avec choix de la ou des langue(s) voulues au départ afin d’enregistrer une ou plusieurs langues à la suite en cliquant sur nouvelle traduction. Ce formulaire sera composé d’un champs titre, une date début et fin, horaires, un champs texte, un champs type d’exposition. On valide avec un bouton pour enregistrer la nouvelle exposition. On peut modifier en cliquant dans une liste générée après la création en rechargeant le formulaire et éventuellement rajouter une nouvelle traduction.La suppression sera possible à partir de la liste précédente.
 Oeuvres:   Une fois l’exposition créée, on peut rajouter les oeuvres une par une à l’aide d’un formulaire multilangues composé d’un champs nom de l’oeuvre, type d’oeuvre, artiste, date de création, position, importation de différent contenu de l’oeuvre(image,son)  et il sera également possible de généré un flashcode a partir des différentes informations saisi dans le formulaire. La modification de l’oeuvre se fera vers la redirection sur le formulaire d’ajout qui sera au préalablement remplie dans lequel ou l’on pourra modifier l’oeuvre en question puis l'enregistrer. Et pour finir la suppression se fera via un bouton dans la liste des oeuvres. 
