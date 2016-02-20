@@ -1,4 +1,4 @@
-############## INSTALLATION DE SYMFONY2 #####################
+############## INSTALLATION ET UTILISATION DE SYMFONY2 #####################
 
 - Vérifiez si PHP est installé en console :  php -v
 
@@ -59,7 +59,7 @@ Installation suivant => suivant etc....
 
 Variable d'environnement à MAJ: (ex: C:\Program Files\Git\bin;C:\Program Files\Git\mingw64\bin;)
 
-INSTALLER UN BUNDLE AVEC COMPOSER
+### INSTALLER UN BUNDLE AVEC COMPOSER ###
 
 Ouvrir le fichier "composer.json" situé à la racine de Symfony puis rajouter dans "require": {"twig/extensions": "~1.0"}
 
@@ -263,7 +263,7 @@ Autre façon plus courte
 ### Relation entre entités ###
 
 
-	## Relation OneToOne
+	## Relation OneToOne ##
 
 Créer une nouvelle entité 
 
@@ -318,7 +318,7 @@ Ajoutez ensuite les getters et les setters à l'aide de la commande:
 php bin/console doctrine:generate:entities FCPlatformBundle:Image
 
 
-	## Relation ManyToOne
+	## Relation ManyToOne ##
 
 Créer une nouvelle entité 
 
@@ -364,4 +364,282 @@ Ajoutez ensuite les getters et les setters à l'aide de la commande:
 
 php bin/console doctrine:generate:entities FCPlatformBundle:Application
 
-	## Relation ManyToMany	   
+	## Relation ManyToMany ##
+
+Advert One-To-Many AdvertCategory One-To-Many Category
+
+Pour cette relation particulière Doctrine va devoir créer une table intermédiaire.
+
+ex: Vous avez une table advert
+	      une table category
+
+Pour une relation ManyToMany il faut créer une table advert_category avec deux colonnes advert_id et category_id.
+
+Créer une nouvelle entité category avec name 
+
+	php bin/console generate:doctrine:entity
+
+	*Donnez lui un nom
+	*Choisissez le format par défault [annotation]
+	*Nom du premier champs
+	*Puis le type de champs
+	*Puis la longueur du champs
+	** Répétez l'opération autant de fois que vous avez de champs.
+	** Puis une fois terminé faites "Entrée" et choisissez "yes" pour générer pour créer un repository vide.
+
+Puis mettez à jour la Base de données
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+	Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)	 
+Afin d'établir cette relation dans vos entités, la syntaxe est la suivante:
+
+Entité propriétaire, Advert:
+
+/**
+      * @ORM\ManyToMany(targetEntity="FC\PlatformBundle\Entity\Category", cascade={"persist"})
+      */
+    private $categories;
+
+Entité inverse, Category:
+
+// Nul besoin d'ajouter une propriété
+
+ Afin de générer les getters et les setters dans le CMD:
+
+php bin/console doctrine:generate:entities FCPlatformBundle:Advert
+
+ensuite mettre à jour la base de données :
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+		## Créer un fixture pour l'entité category ##
+
+// src/FC/PlatformBundle/DataFixtures/ORM/LoadCategory.php
+
+namespace FC\PlatformBundle\DataFixtures\ORM;
+
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use FC\PlatformBundle\Entity\Category;
+
+class LoadCategory implements FixtureInterface
+{
+  // Dans l'argument de la méthode load, l'objet $manager est l'EntityManager
+  public function load(ObjectManager $manager)
+  {
+    // Liste des noms de catégorie à ajouter
+    $names = array(
+      'Développement web',
+      'Développement mobile',
+      'Graphisme',
+      'Intégration',
+      'Réseau'
+    );
+
+    foreach ($names as $name) {
+      // On crée la catégorie
+      $category = new Category();
+      $category->setName($name);
+
+      // On la persiste
+      $manager->persist($category);
+    }
+
+    // On déclenche l'enregistrement de toutes les catégories
+    $manager->flush();
+  }
+}
+
+Pour insérer ses données dans la base de données:
+
+depuis le CMD:
+
+php bin/console doctrine:fixtures:load
+
+répondez 'y'
+
+Et voilà les catégories sont créées !
+
+	## Relation ManyToMany avec attributs ##
+
+Advert One-To-Many AdvertSkill Many-To-One Skill.
+
+Créer une entité Skill avec au moins un attribut name:
+
+php bin/console generate:doctrine:entity
+
+	*Donnez lui un nom
+	*Choisissez le format par défault [annotation]
+	*Nom du premier champs
+	*Puis le type de champs
+	*Puis la longueur du champs
+	** Répétez l'opération autant de fois que vous avez de champs.
+	** Puis une fois terminé faites "Entrée" et choisissez "yes" pour générer pour créer un repository vide.
+
+Ensuite créer une entité de relation AdvertSkill sans utiliser le CMD en créant un fichier AdvertSkill.php
+
+comme suit:
+
+<?php
+// src/FC/PlatformBundle/Entity/AdvertSkill.php
+
+namespace FC\PlatformBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="FC\PlatformBundle\Entity\AdvertSkillRepository")
+ */
+class AdvertSkill
+{
+  /**
+   * @ORM\Column(name="id", type="integer")
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  private $id;
+
+  /**
+   * @ORM\Column(name="level", type="string", length=255)
+   */
+  private $level;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="FC\PlatformBundle\Entity\Advert")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $advert;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="FC\PlatformBundle\Entity\Skill")
+   * @ORM\JoinColumn(nullable=false)
+   */
+  private $skill;
+  
+  // ... vous pouvez ajouter d'autres attributs bien sûr
+}
+
+Ensuite mettre à jour votre base de données:
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+## Créer un fixture pour l'entité skill ##
+
+<?php
+// src/FC/PlatformBundle/DataFixtures/ORM/LoadSkill.php
+
+namespace FC\PlatformBundle\DataFixtures\ORM;
+
+use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use FC\PlatformBundle\Entity\Skill;
+
+class LoadSkill implements FixtureInterface
+{
+  public function load(ObjectManager $manager)
+  {
+    // Liste des noms de compétences à ajouter
+    $names = array('PHP', 'Symfony2', 'C++', 'Java', 'Photoshop', 'Blender', 'Bloc-note');
+
+    foreach ($names as $name) {
+      // On crée la compétence
+      $skill = new Skill();
+      $skill->setName($name);
+
+      // On la persiste
+      $manager->persist($skill);
+    }
+
+    // On déclenche l'enregistrement de toutes les catégories
+    $manager->flush();
+  }
+}
+
+Pour insérer ses données dans la base de données:
+
+depuis le CMD:
+
+php bin/console doctrine:fixtures:load
+
+répondez 'y'
+
+Et voilà les catégories sont créées !
+
+	## Relation bidirectionnelles ##
+
+Nous allons ici construire une relation bidirectionnelle de type Many-To-One.
+
+Nous allons rajouter un attribut, et son annotation, à notre entité inverse "Advert"
+afin de rendre possible l'accès.
+
+/**
+     * @ORM\OneToMany(targetEntity="FC\PlatformBundle\Entity\Application",mappedBy="advert")
+     */
+    private $applications; // Notez le " s ", une annonce est liée à plusieurs candidatures
+
+Nous allons également adapter l'entité propriétaire "Application" pour indiquer que la relation est
+de type bidirectionnelle.
+
+
+/**
+     * @ORM\ManyToOne(targetEntity="FC\PlatformBundle\Entity\Advert",inversedBy="applications")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $advert;
+
+il faut générer les getter et les setter depuis le CMD:
+
+php bin/console doctrine:generate:entities FCPlatformBundle:Advert
+
+ensuite mettre à jour la base de données :
+
+	php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+Puis:
+
+	php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+Afin d'éviter d'avoir à être obligé de définir les deux entités simultanéments à chaque fois
+on va le définir dans une des deux par exemple "Advert"
+
+public function addApplication(Application $application)
+{
+  $this->applications[] = $application;
+
+  // On lie l'annonce à la candidature
+  $application->setAdvert($this);
+    
+  return $this;
+}
+
+
+                  ### LE REPOSITORY ###
+
+Afin de récupérer les entités depuis un repository il existe deux méthodes:
+
+## DQL Doctrine Query Language ##
+
+ex: SELECT a FROM FCPlatformBundle:Advert a
+
+## QueryBuilder ##
+
+ex: $QueryBuilder->select('a')->from('FCPlatformBundle:Advert', 'a');
+
+## Les méthodes de récupération de base ##
+
+	# Les méthodes normales #
+
+		1) find($id)
+		
+		ex: $repository = $this->getDoctrine()->getManager()
