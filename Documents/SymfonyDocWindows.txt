@@ -636,10 +636,266 @@ ex: SELECT a FROM FCPlatformBundle:Advert a
 
 ex: $QueryBuilder->select('a')->from('FCPlatformBundle:Advert', 'a');
 
+
+
 ## Les méthodes de récupération de base ##
 
 	# Les méthodes normales #
 
 		1) find($id)
 		
-		ex: $repository = $this->getDoctrine()->getManager()
+		ex: $repository = $this
+					->getDoctrine()
+					->getManager()
+					->getRepository('FCPlatformBundle:Advert');
+		    $advert = $repository->find(5); // $advert est une instance de 
+		                                    // FCPlatformBundle:Advert correspondant à l'id 5.
+
+		2) findAll()
+
+		ex: $repository = $this
+					->getDoctrine()
+					->getManager()
+					->getRepository('FCPlatformBundle:Advert');
+		    $listAdverts = $repository->findAll();
+		    foreach ($listAdverts as $advert) {
+		     // $advert est une instance de Advert
+			echo $advert->getContent();
+		    }
+
+		3) findBy()
+
+		    // La syntaxe est la suivante
+		    $repository->findBy(
+			array $criteria,
+			array $orderBy = null,
+			$limit = null,
+			$offset = null
+		    );
+		ex: $listAdverts = $repository->findBy(
+			array('author' => 'Alexandre'), // Critere
+			array('date' => 'desc'),        // Tri
+			5,                              // Limite
+  			0				// Offset
+		    );
+
+		4) findOneBy()
+
+		ex: $advert = $repository->findOneBy(array('author' => 'Marine'));
+
+	# Les méthodes magiques #
+
+		1) findByX($valeur) // Le X peut être remplacé par une propriété de Advert renvoie une ou plusieurs lignes (affichage à l'aide d'un "for" sous twig)
+
+		ex: $listAdverts = $repository->findByAuthor('Alexandre');
+
+		2) findOneByX($valeur) // Le X peut être remplacé par une propriété de Advert renvoie une seule ligne (affichage sans "for" sous twig)
+
+		ex: $advert = $repository->findByOneTitle('Recherche développeur.');
+
+
+
+
+## Les méthodes de récupération personnelles ##	
+
+	# Le QueryBuilder #
+
+	Dans un premier nous allons créer notre propre méthode en rajoutant une function dans AdvertRepository.php qui est dans :
+
+ 	src/FC/PlatformBundle/Entity/AdvertRepository.php ou src/FC/PlatformBundle/Repository/AdvertRepository.php
+
+						Détail de la function 
+
+	public function myFindAll()
+	{
+		// Méthode 1 en passant par l'EntityManager
+		$queryBuilder = $this->_em->createQueryBuilder()->select('a')->from($this->_entityName, 'a');
+		// Dans un repository, $this->_entityName est le namespace de l'entité gérée
+		// Ici, il vaut donc FC\PlatformBundle\Entity\Advert
+
+		// Méthode 2 : en passant par le raccourci (je recommande)
+		$queryBuilder = $this->createQueryBuilder('a');
+
+		// On n'ajoute pas de critère ou tri particulier, la construction 
+		// de notre requête est finie
+
+		// On récupère la Query à partir du QueryBuilder
+		$query = $queryBuilder->getQuery();
+
+		// On récupère les résultats à partir de la Query
+		$results = $query->getResult();
+
+		// On retourne ces résultats
+		return $results;
+	}
+	
+	public function myFindOne($id) // Similaire au find($id)
+	{
+		$qb = $this->createQueryBuilder('a');
+
+		$qb->where('a.id = :id')->setParameter('id', $id);
+
+		return $qb->getQuery()->getResult();
+	}
+
+	public function findByAuthorAnDate($author, $datetime) // Deux paramètres author et datetime
+	{
+		$qb = $this->createQueryBuilder('a');
+
+		$qb->where('a.author = :author')->setParameter('author', $author)
+		   ->andWhere('a.date = :datetime')->setParameter('datetime', $datetime)
+		   ->orderBy('a.date', 'DESC');
+
+		return $qb->getQuery()->getResult();
+	}
+
+	public function myFindOne($id) // Similaire au find($id)
+	{
+		$qb = $this->createQueryBuilder('a');
+
+		$qb->where('a.id = :id')->setParameter('id', $id);
+
+		return $qb->getQuery()->getResult();
+	}
+
+	public function findByAuthorAnDate($author, $year) // Deux paramètres author et year
+	{
+		$year = $year."-00-00 00:00:00"; // On formate une datetime par défaut à partir de l'année choisie
+		$qb = $this->createQueryBuilder('a');
+
+		$qb->where('a.author = :author')->setParameter('author', $author)
+		   ->andWhere('a.date > :year')->setParameter('year', $year)
+		   ->orderBy('a.date', 'DESC');
+
+		return $qb->getQuery()->getResult();
+	}
+
+	Pour cette fonction on oublie pas d'intégrer le "use" : use Doctrine\ORM\QueryBuilder;
+
+	public function whereCurrentYear(QueryBuilder $qb)
+	{
+		$qb
+			->andWhere('a.date BETWEEN :start AND :end')
+			->setParameter('start', new \Datetime(date('Y').'-01-01')) // Date entre le 1er janvier de cette année
+			->setParameter('end', new \Datetime(date('Y').'-12-31')); // Et le 31 décembre cette année
+	}
+
+	public function  myFind()
+	{
+		$qb = $this->createQueryBuilder('a');
+
+		// On peut ajouter ce qu'on veut avant
+		$qb
+			->where('a.author = :author')
+			->setParameter('author', 'Boris');
+
+		// On applique notre condition sur le QueryBuilder
+		$this->whereCurrentYear($qb);
+
+		// On peut ajouter ce qu'on veut après
+		$qb->orderBy('a.date', 'DESC');
+
+		return $qb->getQuery()->getResult();
+	}
+
+	# Liste non exhaustives des méthodes de Query #
+
+	getQuery() : Exécute la requête.
+
+	getResult() : Retourne la requête exécutée.
+ 
+		ex: $listAdverts = $qb->getQuery()->getResult();
+
+	    	    foreach ($listAdverts as $advert) {
+  	    	    	// $advert est une instance d'Advert dans notre exemple
+  	    	    	$advert->getContent();
+	    	    }
+
+	getArrayResult()
+
+		ex: $listAdverts = $qb->getQuery()->getArrayResult();
+
+		    foreach ($listAdverts as $advert) {
+  			// $advert est un tableau
+  			// Faire $advert->getContent() est impossible. Vous devez faire :
+  			$advert['content'];
+		    }
+	
+	getScalarResult()
+
+		ex: $values = $qb->getQuery()->getScalarResult();
+
+		    foreach ($values as $value) {
+  			// $value est la valeur de ce qui a été sélectionné : un nombre, un texte, etc.
+  			$value;
+
+  			// Faire $value->getAttribute() ou $value['attribute'] est impossible
+		    }
+
+
+	getOneOrNullResult()
+
+		ex: $advert = $qb->getQuery()->getOneOrNullResult();
+
+			// $advert est une instance d'Advert dans notre exemple
+			// Ou null si la requête ne contient pas de résultat
+
+			// Et une exception a été déclenchée si plus d'un résultat
+
+	getSingleResult()
+
+		ex: $advert = $qb->getQuery()->getSingleResult();
+
+			// $advert est une instance d'Advert dans notre exemple
+
+			// Une exception a été déclenchée si plus d'un résultat
+			// Une exception a été déclenchée si pas de résultat
+
+	getSingleScalarResult()
+
+		ex: $value = $qb->getQuery()->getSingleScalarResult();
+
+			// $value est directement la valeur du COUNT dans la requête exemple
+
+			// Une exception a été déclenchée si plus d'un résultat
+			// Une exception a été déclenchée si pas de résultat
+
+	execute() // Principalement des requêtes qui ne retournent pas de résultat (des UPDATE, INSERT INTO, etc....)
+
+		ex: 	// Exécute un UPDATE par exemple :
+		    $qb->getQuery()->execute();	
+
+
+	Cependant toutes les autres méthodes que nous venons de voir ne sont en fait que des raccourcis vers cette méthode execute(),
+	en changeant juste le mode d'hydratation des résultats(objet, tableau, etc...).
+
+	ex: // Voici deux méthodes strictement équivalentes :
+	    $results = $query->getArrayResult();
+	    // Et :
+	    $results = $query->execute(array(), Query::HYDRATE_ARRAY);
+
+	    // Le premier argument de execute() est un tableau de paramètres
+	    // Vous pouvez aussi passer par la méthode setParameter(), au choix
+
+	    // Le deuxième argument de execute() est la dite méthode d'hydratation
+
+
+
+	# Le Doctrine Query Language DQL #
+
+	Pour créer une requête en utilisant de DQL, il faut utiliser la méthode createQuery() de l'EntityManager:
+
+	ex:
+
+	// Depuis un repository
+	public function myFindAllDQL()
+	{
+  		$query = $this->_em->createQuery('SELECT a FROM OCPlatformBundle:Advert a');
+  		$results = $query->getResult();
+
+  		return $results;
+	}
+	
+	
+
+## Utiliser les jointures dans nos requêtes ##		
