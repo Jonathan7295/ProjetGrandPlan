@@ -898,4 +898,21 @@ ex: $QueryBuilder->select('a')->from('FCPlatformBundle:Advert', 'a');
 	
 	
 
-## Utiliser les jointures dans nos requêtes ##		
+## Utiliser les jointures dans nos requêtes ##	
+
+	# Avec le QueryBuilder #
+
+	// Depuis le repository d'Advert
+	public function getAdvertWithApplications()
+	{
+		$qb = $this->createQueryBuilder('a')
+				   ->leftJoin('a.applications', 'app')
+				   ->addSelect('app');
+
+		return $qb
+				  ->getQuery()
+				  ->getResult();
+				  
+	}
+
+	
