@@ -139,4 +139,15 @@
     			<path style="stroke-linejoin: round;" p:name="line1" id="ca74518cf8df462b871e491930e1a6c2" d="M 0 0 C 30 0 60 0 90 0 C 90 8 90 17 90 25 C 60 25 30 25 0 25 C 0 17 0 8 0 0 z"/>
     		</g>
     		<text p:name="text" id="030e0175758143919f6ecba66cdbc564" style="font-family: 'Comic Sans MS'; font-size: 12px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 0, 0); fill-opacity: 1;" transform="translate(14,17)">Rechercher</text>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Common:RoundedRect" id="d91b8e8d8c6a47de8328db888604b065" transform="matrix(1,0,0,1,730,669)"><p:metadata><p:property name="box"><![CDATA[151,36]]></p:property><p:property name="withBlur"><![CDATA[false]]></p:property><p:property name="radius"><![CDATA[0,0]]></p:property><p:property name="textPadding"><![CDATA[0,4.5]]></p:property><p:property name="fillColor"><![CDATA[#222BFF80]]></p:property><p:property name="strokeColor"><![CDATA[#1FE0FFFF]]></p:property><p:property name="strokeStyle"><![CDATA[2|]]></p:property><p:property name="textContent"><![CDATA[<span style="font-size: large;">Retour</span>]]></p:property><p:property name="textFont"><![CDATA["Liberation Sans",Arial,sans-serif|normal|normal|13px|none]]></p:property><p:property name="textColor"><![CDATA[#000B40FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+
+            <defs>
+                <rect width="149" height="34" rx="0" ry="0" x="0" y="0" style="stroke-width: 2; fill: rgb(34, 43, 255); fill-opacity: 0.501961; stroke: rgb(31, 224, 255); stroke-opacity: 1;" p:name="rrRect" id="db993f71845544039da33f73249ca8ed" transform="translate(1,1)"/>
+                <filter height="1.2558399" y="-0.12792" width="1.06396" x="-0.03198" p:name="shadingFilter" id="3143232bb610487a8af2b7e8ee637d74">
+                    <feGaussianBlur stdDeviation="1" in="SourceAlpha"/>
+                </filter>
+            </defs>
+            <use xlink:href="#db993f71845544039da33f73249ca8ed" xmlns:xlink="http://www.w3.org/1999/xlink" transform="translate(2, 2)" p:filter="url(#3143232bb610487a8af2b7e8ee637d74)" style="opacity: 0.5; visibility: hidden; display: none;" p:heavy="true" p:name="bgCopy" id="62188a73477e4260afd8c5e2f13ebfa1"/>
+            <use xlink:href="#db993f71845544039da33f73249ca8ed" xmlns:xlink="http://www.w3.org/1999/xlink"/>
+            <foreignObject x="4.5" y="7" width="142" height="22" p:name="text" id="4d5d62dda30743a89d9298a03983a338" style="font-family: &quot;Liberation Sans&quot;,Arial,sans-serif; font-size: 13px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 11, 64); fill-opacity: 1; color: rgb(0, 11, 64); opacity: 1; text-align: center;"><div xmlns="http://www.w3.org/1999/xhtml"><span style="font-size: large;">Retour</span></div></foreignObject>
         </g></Content></Page></Pages></Document>
