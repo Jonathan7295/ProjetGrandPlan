@@ -65,4 +65,9 @@
                     <html:div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;"></html:div>
                 </html:div>
             </foreignObject>
+        </g><g xmlns="http://www.w3.org/2000/svg" p:type="Shape" xmlns:p="http://www.evolus.vn/Namespace/Pencil" p:def="Evolus.Sketchy.GUI:button" id="7b984804b9b14205924f7e5b72b37fe6" transform="matrix(1,0,0,1,782,46)"><p:metadata><p:property name="box"><![CDATA[135,32]]></p:property><p:property name="disabled"><![CDATA[false]]></p:property><p:property name="default"><![CDATA[false]]></p:property><p:property name="fillColor"><![CDATA[#222BFF80]]></p:property><p:property name="strokeColor"><![CDATA[#1FE0FFFF]]></p:property><p:property name="strokeStyle"><![CDATA[1|]]></p:property><p:property name="textContent"><![CDATA[Retour]]></p:property><p:property name="textFont"><![CDATA['Comic Sans MS'|normal|normal|17px|none]]></p:property><p:property name="textColor"><![CDATA[#000B40FF]]></p:property><p:property name="textAlign"><![CDATA[1,1]]></p:property></p:metadata>
+            <g p:name="rect" id="d52245669e2b42228119e331095548cd" style="fill: rgb(33, 41, 255); fill-opacity: 0.501961; stroke: rgb(31, 224, 255); stroke-opacity: 1; stroke-width: 1;">
+    			<path style="stroke-linejoin: round;" p:name="line1" id="14f5d32365aa49b0a08d3cf10dcf1221" d="M 0 0 C 45 1 90 1 135 0 C 135 11 135 21 135 32 C 90 33 45 33 0 32 C 0 21 0 11 0 0 z"/>
+    		</g>
+    		<text p:name="text" id="d0337940b5484e8491a6e00cf9d21f1b" style="font-family: 'Comic Sans MS'; font-size: 17px; font-weight: normal; font-style: normal; text-decoration: none; fill: rgb(0, 11, 64); fill-opacity: 1;" transform="translate(39,23)">Retour</text>
         </g></Content></Page></Pages></Document>
