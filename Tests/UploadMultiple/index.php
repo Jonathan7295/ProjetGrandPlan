@@ -2,7 +2,7 @@
 	Sélectionner un ou plusieurs fichiers<input type="file" name="images[]" multiple />
 	<input type="submit" name="ok" value="valider" />
 </form>
-
+<!-- Pour modifier la taille autorisée de l'upload dans le php.ini il faut modifier "post_max_size" et "upload_max_filesize" -->
 
 <?php
 	$nameArray = array();
