@@ -36,6 +36,4 @@
 		
 		echo "Téléchargement effectué avec succès !";
 	}
-	
-
 ?>
