@@ -1,0 +1,3 @@
+module_gestion_homepage:
+    path:     /
+    defaults: { _controller: ModuleGestionBundle:Default:index }
