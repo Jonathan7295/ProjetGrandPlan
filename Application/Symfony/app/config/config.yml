@@ -38,17 +38,17 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: ModuleGestionBundle\Entity\Utilisateur
-<<<<<<< HEAD
+
     registration:
         confirmation:
             enabled: true
-=======
+
     service:
         mailer: fos_user.mailer.twig_swift
     resetting:
         email:    
             template: email/password_resetting.email.twig
->>>>>>> bb88f466ec820f24a4daf8badd6cea9b99580cef
+
 
 # Twig Configuration
 twig:
