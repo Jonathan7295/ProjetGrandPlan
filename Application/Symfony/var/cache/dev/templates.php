@@ -140,4 +140,5 @@
   'WebProfilerBundle:Router:panel.html.twig' => 'C:\\wamp\\www\\ProjetGrandPlan\\Application\\Symfony\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views/Router/panel.html.twig',
   '::base.html.twig' => 'C:\\wamp\\www\\ProjetGrandPlan\\Application\\Symfony\\app/Resources\\views/base.html.twig',
   ':default:index.html.twig' => 'C:\\wamp\\www\\ProjetGrandPlan\\Application\\Symfony\\app/Resources\\views/default/index.html.twig',
+  ':email:password_resetting.email.twig' => 'C:\\wamp\\www\\ProjetGrandPlan\\Application\\Symfony\\app/Resources\\views/email/password_resetting.email.twig',
 );
