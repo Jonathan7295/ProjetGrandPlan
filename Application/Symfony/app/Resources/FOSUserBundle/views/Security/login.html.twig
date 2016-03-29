@@ -28,21 +28,6 @@
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
 	    <script type="text/javascript">
 
-			$('.login-input').on('focus', function() {
-			  $('.login').addClass('focused');
-			});
-
-			$('.login').on('submit', function(e) {
-			  e.preventDefault();
-			  $('.login').removeClass('focused').addClass('loading');
-			});
-
-	    /*Fonction pour changer le loading*/
-	    function loading()
-	    {
-	      $('.login-header > .loader').css('animation-iteration-count', '3');
-	    }
-
 		</script>
 
 	{% endblock %}
