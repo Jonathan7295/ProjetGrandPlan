@@ -106,7 +106,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->redirect($pathinfo.'/', 'module_gestion_homepage');
             }
 
-            return array (  '_controller' => 'FOSUserBundle:security:login',  '_route' => 'module_gestion_homepage',);
+            return array (  '_controller' => 'FOS\\UserBundle\\Controller\\SecurityController::loginAction',  '_route' => 'module_gestion_homepage',);
         }
 
         // module_gestion_index
