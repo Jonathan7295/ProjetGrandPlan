@@ -1104,3 +1104,7 @@
 [2016-04-05 23:27:09] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
 [2016-04-05 23:27:10] request.INFO: Matched route "_wdt". {"route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"0cbf12","_route":"_wdt"},"request_uri":"http://localhost/ProjetGrandPlan/Application/Symfony/web/app_dev.php/_wdt/0cbf12"} []
 [2016-04-05 23:27:10] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
+[2016-04-07 21:30:48] request.INFO: Matched route "module_gestion_homepage". {"route_parameters":{"_controller":"FOS\\UserBundle\\Controller\\SecurityController::loginAction","_route":"module_gestion_homepage"},"request_uri":"http://localhost/ProjetGrandPlan/Application/Symfony/web/app_dev.php/"} []
+[2016-04-07 21:30:49] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
+[2016-04-07 21:30:52] request.INFO: Matched route "_wdt". {"route_parameters":{"_controller":"web_profiler.controller.profiler:toolbarAction","token":"18e766","_route":"_wdt"},"request_uri":"http://localhost/ProjetGrandPlan/Application/Symfony/web/app_dev.php/_wdt/18e766"} []
+[2016-04-07 21:30:52] security.INFO: Populated the TokenStorage with an anonymous Token. [] []
