@@ -1,7 +1,0 @@
-module_gestion_homepage:
-    path:     /
-    defaults: { _controller: FOSUserBundle:Security:login }
-
-module_gestion_index:
-    path:     /index
-    defaults: { _controller: ModuleGestionBundle:Default:index }
