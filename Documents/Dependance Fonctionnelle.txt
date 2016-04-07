@@ -1,0 +1,16 @@
+id_oeuvre -> id_type_oeuvre
+id_type_oeuvre, id_statu -> id_oeuvre
+id_type_oeuvre, id_tableau -> id_oeuvre
+id_type_oeuvre, id_multitude -> id_oeuvre
+id_expo -> id_evenement
+id_oeuvre, id_expo -> position_salle_oeuvre
+id_expo, id_texte -> langue
+id_oeuvre, id_texte_oeuvre -> langue
+id_oeuvre -> id_artiste
+id_expo -> id_auteur
+id_expo -> id_theme
+id_expo, position_salle_oeuvre -> id_oeuvre
+id_oeuvre -> type_oeuvre
+id_oeuvre -> id_multimedia
+id_utilisateur, numero_tel_utilisateur -> libelle_utilisateur
+id_oeuvre, id_texte -> langue 
