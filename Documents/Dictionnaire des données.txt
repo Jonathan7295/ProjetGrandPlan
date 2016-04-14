@@ -8,7 +8,7 @@
 8 Num_Tel_utilisateur
 9 Libellé_Tel_Utilisateur
 
-10Id_Texte_Expo
+10 Id_Texte_Expo
 11 Id_exposition
 12 Nom_exposition
 13 Date_heure_debut_exposition
@@ -18,57 +18,59 @@
 17 Description_texte_exposition
 
 18 Position_salle_oeuvre
-19 Nom_evenement (Cycle)
-20 Libellé_thème_exposition
+19 Id_Evenement
+20 Nom_evenement (Cycle)
+21 Id_Theme
+22 Libellé_thème_exposition
 
-21 Id_auteur
-22 Nom_auteur
-23 Prenom_auteur
-24 Nationalite_auteur
-25 Date_naissance_auteur
+23 Id_auteur
+24 Nom_auteur
+25 Prenom_auteur
+26 Nationalite_auteur
+27 Date_naissance_auteur
 
-26 Id_oeuvre
-27 Image_flashcode_oeuvre
-28 Etat_oeuvre
-29 Nombre_visite_oeuvre
-30 Langue_traduction_oeuvre
+28 Id_oeuvre
+29 Image_flashcode_oeuvre
+30 Etat_oeuvre
+31 Nombre_visite_oeuvre
+32 Langue_traduction_oeuvre
 
-31 Id_type_oeuvre
-32 Titre_type_oeuvre
-33 Date_creation_type_oeuvre
-34 Description_texte_type_oeuvre
+33 Id_type_oeuvre
+34 Titre_type_oeuvre
+35 Date_creation_type_oeuvre
+36 Description_texte_type_oeuvre
 
-35 Id_tableau
-36 Dimension_largeur_tableau
-37 Dimension_hauteur_tableau
+37 Id_tableau
+38 Dimension_largeur_tableau
+39 Dimension_hauteur_tableau
 
-38 Id_statut
-39 Dimension_largeur_statut
-40 Dimension_hauteur_statut
-41 Dimension_longueur_statut
-42 Dimension_profondeur_statut
+40 Id_statut
+41 Dimension_largeur_statut
+42 Dimension_hauteur_statut
+43 Dimension_longueur_statut
+44 Dimension_profondeur_statut
 
-43 Id_multimedia
-44 Duree_multimedia
-45 Stockage_multimedia
-46 Presence_ecran_multimedia (Booleen)
+45 Id_multimedia
+46 Duree_multimedia
+47 Stockage_multimedia
+48 Presence_ecran_multimedia (Booleen)
 
-47 Id_artiste
-48 Nom_artiste
-49 Prenom_artiste
-50 Nationalite_artiste
-51 Date_naissance_artiste
-52 Date_mort_artiste
-53 Descriptif_artiste (facultatif)
+49 Id_artiste
+50 Nom_artiste
+51 Prenom_artiste
+52 Nationalite_artiste
+53 Date_naissance_artiste
+54 Date_mort_artiste
+55 Descriptif_artiste (facultatif)
 
-54 Id_multi_oeuvre
-55 Nom_multi_oeuvre
-56 Lien_multi_oeuvre
+56 Id_multi_oeuvre
+57 Nom_multi_oeuvre
+58 Lien_multi_oeuvre
 
-57 Id_exposition
-58 Date_debut_exposition
-59 Date_fin_exposition
-60 Id_oeuvre
+59 Id_exposition
+60 Date_debut_exposition
+61 Date_fin_exposition
+62 Id_oeuvre
 
 /**Clé**/
-Id_utilisateur,Num_Tel_utilisateur, Id_Exposition, Id_texte_Expo, Id_Evenement, Langue_Expo, Id_Auteur, Id_Oeuvre, Position_Salle_Oeuvre, Id_Texte
+Id_utilisateur,Num_Tel_utilisateur, Id_Exposition, Id_texte_Expo, Id_Evenement, Langue_Expo, Id_Auteur, Id_Oeuvre, Position_Salle_Oeuvre, Langue_Oeuvre, Id_Type_oeuvre, Id_Artiste, Id_multi_Oeuvre.o
