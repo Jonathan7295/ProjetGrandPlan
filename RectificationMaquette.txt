@@ -1,0 +1,29 @@
+/********Formulaire Utilisateur**************/
+
+Role_utilisateur
+
+
+/**************Création d'exposition***********/
+
+Juste un champs Nom et autant de champs description à traduire
+
+Deux champs heures pour date début et date fin
+
+Un select choix de l'auteur avec possibilité de rediriger sur un formulaire pour en créer un 
+
+Un select choix de thème avec possibilité de rediriger sur un formulaire pour en créer un
+
+Un champ radio pour les événements
+
+
+/*************Création d'oeuvre****************/
+
+Juste un champs Nom et autant de champs description à traduire
+ 
+Un select choix de l'artiste à la place du champs Auteur avec possibilité de rediriger sur un formulaire pour en créer un
+
+Un select pour le type d'oeuvre qui affiche suivant le choix des champs différents:
+
+*Tableau => Dimensions Largeur et Hauteur
+*Statut => Dimensions Hauteur Largeur Profondeur Longueur
+*Multimédia => Durée Mémoire(stockage) Vidéo ou musique (booléen) 
