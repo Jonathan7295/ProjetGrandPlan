@@ -1,9 +1,37 @@
 id_oeuvre -> id_type_oeuvre
+
 id_type_oeuvre, id_statu -> id_oeuvre
 [id_type_oeuvre, id_statu]+ = {id_type_oeuvre, id_statu, dimension_largeur_statu, dimension_hauteur_statu, dimension_longeur_statu, dimension_profondeur_statu} on ne retrouve pas l'id_oeuvre donc il est nécessaire
-id_type_oeuvre, id_multimedia -> id_oeuvre
-[id_type_oeuvre, id_multimedia]+ = {id_type_oeuvre, id_statu, dimension_largeur_statu, dimension_hauteur_statu, dimension_longeur_statu, dimension_profondeur_statu} on ne retrouve pas l'id_oeuvre donc il est nécessaire
-id_type_oeuvre, id_tableau -> id_oeuvre
-id_expo -> id_evenement (cycle de vie)
-id_oeuvre, id_expo -> position_salle_oeuvre
 
+id_type_oeuvre, id_multimedia -> id_oeuvre
+[id_type_oeuvre, id_multimedia]+ = {id_type_oeuvre, id_multimedia, duree_multimedi, stockage} on ne retrouve pas l'id_oeuvre donc il est nécessaire
+
+id_type_oeuvre, id_tableau -> id_oeuvre
+
+id_expo -> id_evenement (cycle de vie)
+
+id_oeuvre, id_expo -> position_salle_oeuvre
+[id_oeuvre, id_expo]+ = {id_oeuvre, id_expo, nom_expositon, date_heure_debut, date_heure_fin, nombre_visite_expo, image_flashcode_oeuvre, etat_oeuvre, nombre_visite_oeuvre}
+on ne retrouve pas la position_salle_oeuvre donc il est nécessaire
+
+id_exposition, id_texte_exposition -> langue
+[id_exposition, id_texte_expositon]+ = {id_expositon, id_texte_exposition, nom_expositon, date_heure_debut, date_heure_fin, nombre_visite_expo, description_texte_expo} on ne retrouve pas la langue donc il est nécessaire
+
+id_oeuvre, id_texte_oeuvre -> langue
+[id_oeuvre, id_texte_oeuvre]+ = {id_oeuvre, id_texte_oeuvre, image_flashcode_oeuvre, etat_oeuvre, nombre_visite_oeuvre} on ne retrouve pas la langue donc il est nécessaire
+
+id_exposition -> id_auteur
+
+id_oeuvre -> id_artiste
+
+id_exposition -> id_theme
+
+id_exposition, position_salle_oeuvre -> id_oeuvre
+[id_exposition, position_salle_oeuvre]+ = {id_exposition, position_salle_oeuvre, om_expositon, date_heure_debut, date_heure_fin, nombre_visite_expo} on ne retrouve pas l'id_oeuvre donc il est nécessaire
+
+id_oeuvre -> type_oeuvre
+
+id_oeuvre -> id_multimedia
+
+id_utilisateur, num_tel_utilisateur -> libellé
+[id_utilisateur, num_tel_utilisateur]+ = {[id_utilisateur, num_tel_utilisateur, nom_utilisateur, prenom_utilisateur, login_utilisateur, role_utilisateur, email_utilisateur} comme la clé primaire de téléphone est id_utilisateur et num_tel_utilisateur donc on obtien le libellé grâce à ses deux la.
