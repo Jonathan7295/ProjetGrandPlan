@@ -1,61 +1,76 @@
-1 identifiant_oeuvre entier 8
-2 nom_fr_oeuvre varchar 50
-3 nom_en_oeuvre varchar 50
-4 nom_ru_oeuvre varchar 50
-5 nom_ch_oeuvre varchar 50
-6 nom_al_oeuvre varchar 50
-7 description_fr_oeuvre varchar 250
-8 description_en_oeuvre varchar 250
-9 description_ru_oeuvre varchar 250
-10 description_ch_oeuvre varchar 250
-11 description_al_oeuvre varchar 250
-12 position_salle_oeuvre entier 2
-15 image_oeuvre varchar 250
-16 type_oeuvre varchar 50
-17 nom_artiste varchar 50
-18 image_flashcode_oeuvre varchar 100
-19 etat_oeuvre boolean
-20 dimmension_largeur_oeuvre réel 4
-21 dimmension_hauteur_oeuvre réel 4
-22 dimmension_profondeur_oeuvre réel 4
-23 nombre_visite_oeuvre entier 8
+1 Id_utilisateur 
+2 Nom_utilisateur 
+3 Prenom_utilisateur
+4 Login_utilisateur 
+5 Password_utilisateur
+6 Role_utilisateur
+7 Email_utilisateur
+8 Num_Tel_utilisateur
+9 Libellé_Tel_Utilisateur
 
-24 identifiant_exposition entier 8
-25 theme_fr_exposition varchar 50
-26 theme_en_exposition varchar 50
-27 theme_ru_exposition varchar 50
-28 theme_ch_exposition varchar 50
-29 theme_al_exposition varchar 50
-30 nom_fr_exposition varchar 50
-31 nom_en_exposition varchar 50
-32 nom_ru_exposition varchar 50
-33 nom_ch_exposition varchar 50
-34 nom_al_exposition varchar 50
-35 description_fr_auteur_exposition varchar 250
-36 description_en_auteur_exposition varchar 250
-37 description_ru_auteur_exposition varchar 250
-38 description_ch_auteur_exposition varchar 250
-39 description_al_auteur_exposition varchar 250
-40 cycle_vie_exposition varchar 50
-41 date_heure_debut_expostion datetime
-42 date_heure_fin_exposition datetime
-43 nombre_visite_exposition entier 8
+10 Id_Texte_Expo
+11 Id_exposition
+12 Nom_exposition
+13 Date_heure_debut_exposition
+14 Date_heure_fin_exposition
+15 Nombre_visite_exposition
+16 Langue_traduction_exposition
+17 Description_texte_exposition
 
-44 identifiant_utilisateur entier 8
-45 nom_utilisateur varchar 30
-46 prenom_utilisateur varchar 30
-47 login_utilisateur varchar 20
-48 password_utilisateur varchar 20
-49 role_utilisateur varchar 20
-50 email_utilisateur varchar 100
+18 Position_salle_oeuvre
+19 Id_Evenement
+20 Nom_evenement (Cycle)
+21 Id_Theme
+22 Libellé_thème_exposition
 
-52 num_utilisateur_tel entier 12
-53 libelle_utilisateur_tel varchar 50
+23 Id_auteur
+24 Nom_auteur
+25 Prenom_auteur
+26 Nationalite_auteur
+27 Date_naissance_auteur
 
-54 id_son
-55 lien_son
-56 libelle_son
+28 Id_oeuvre
+29 Image_flashcode_oeuvre
+30 Etat_oeuvre
+31 Nombre_visite_oeuvre
+32 Langue_traduction_oeuvre
 
-57 id_video
-58 lien_video
-59 libelle_video
+33 Id_type_oeuvre
+34 Titre_type_oeuvre
+35 Date_creation_type_oeuvre
+36 Description_texte_type_oeuvre
+
+37 Id_tableau
+38 Dimension_largeur_tableau
+39 Dimension_hauteur_tableau
+
+40 Id_statut
+41 Dimension_largeur_statut
+42 Dimension_hauteur_statut
+43 Dimension_longueur_statut
+44 Dimension_profondeur_statut
+
+45 Id_multimedia
+46 Duree_multimedia
+47 Stockage_multimedia
+48 Presence_ecran_multimedia (Booleen)
+
+49 Id_artiste
+50 Nom_artiste
+51 Prenom_artiste
+52 Nationalite_artiste
+53 Date_naissance_artiste
+54 Date_mort_artiste
+55 Descriptif_artiste (facultatif)
+
+56 Id_multi_oeuvre
+57 Nom_multi_oeuvre
+58 Lien_multi_oeuvre
+
+59 Id_exposition
+60 Date_debut_exposition
+61 Date_fin_exposition
+62 Id_oeuvre
+
+/**Clé**/
+Id_utilisateur,Num_Tel_utilisateur, Id_Exposition, Id_texte_Expo, Id_Evenement, Langue_Expo, Id_Auteur, Id_Oeuvre, Position_Salle_Oeuvre, Langue_Oeuvre, Id_Type_oeuvre, Id_Artiste, Id_multi_Oeuvre.o
