@@ -1,0 +1,9 @@
+id_oeuvre -> id_type_oeuvre
+id_type_oeuvre, id_statu -> id_oeuvre
+[id_type_oeuvre, id_statu]+ = {id_type_oeuvre, id_statu, dimension_largeur_statu, dimension_hauteur_statu, dimension_longeur_statu, dimension_profondeur_statu} on ne retrouve pas l'id_oeuvre donc il est nécessaire
+id_type_oeuvre, id_multimedia -> id_oeuvre
+[id_type_oeuvre, id_multimedia]+ = {id_type_oeuvre, id_statu, dimension_largeur_statu, dimension_hauteur_statu, dimension_longeur_statu, dimension_profondeur_statu} on ne retrouve pas l'id_oeuvre donc il est nécessaire
+id_type_oeuvre, id_tableau -> id_oeuvre
+id_expo -> id_evenement (cycle de vie)
+id_oeuvre, id_expo -> position_salle_oeuvre
+
