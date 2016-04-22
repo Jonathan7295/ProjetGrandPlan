@@ -932,4 +932,51 @@ PostLoad	L'évènement PostLoad se produit juste après que l'EntityManager a charg
 (Attention, ces évènements se produisent lorsque vous créez et modifiez vos entités en manipulant les objets. Ils ne sont pas déclenchés lorsque vous effectuez des requêtes DQL ou avec le QueryBuilder. Car ces requêtes peuvent toucher un grand nombre d'entités et il serait dangereux pour Doctrine de déclencher les évènements correspondants un à un).
 
 
+	# Définir un callback de cycle de vie
+
+	ex:
+ 
+	- Dans l'entité Advert nous allons ajouter un champs représentant la date de la dernière édition de l'annonce.
+
 	
+	/**
+ 	  * @ORM\Column(name="updated_at", type="datetime", nullable=true)
+ 	  */
+	  private $updatedAt;
+
+
+	N'oubliez pas de mettre à jour la base de données:
+	
+
+			php bin/console doctrine:schema:update --dump-sql (Créer la requête)
+
+		Puis:
+
+			php bin/console doctrine:schema:update --force (Pour exécuter la requête)
+
+	  - Définir ensuite l'entité comme contenant des callbacks
+
+	
+		<?php
+		// src/OC/PlatformBundle/Entity/Advert.php
+
+		namespace OC\PlatformBundle\Entity;
+
+		/**
+ 		 * @ORM\Entity(repositoryClass="OC\PlatformBundle\Entity\AdvertRepository")
+ 		* @ORM\HasLifecycleCallbacks()
+ 	 	*/
+		class Advert
+		{
+  			// …
+
+  	  		public function updateDate()
+  	  		{
+    				$this->setUpdatedAt(new \Datetime());
+  	 		}
+		}
+
+	  - Maintenant il faut dire à Doctrine d'exécuter cette méthode
+
+
+		 	
