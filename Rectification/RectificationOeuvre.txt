@@ -1,8 +1,8 @@
 Rectification :
 
 Oeuvre :
-- Ne pas pouvoir mettre 2 fois le même nom d'oeuvre
-- Et si un artiste n'est pas mort , on fait comment ? :D
-- Verifier si 2 langues sont identique
-- On peut enregistrer une oeuvre sans lui attribuer de type
-- On peut cliquer sur enregistrer une oeuvre sans lui attribuer d'artiste et dans ce cas la cela renvoie sur le formulaire en déplaçant les éléments 
+- Ne pas pouvoir mettre 2 fois le même nom d'oeuvre OK
+- Et si un artiste n'est pas mort , on fait comment ? :D OK
+- Verifier si 2 langues sont identiques OK
+- On peut enregistrer une oeuvre sans lui attribuer de type OK
+- On peut cliquer sur enregistrer une oeuvre sans lui attribuer d'artiste et dans ce cas la cela renvoie sur le formulaire en déplaçant les éléments OK 
