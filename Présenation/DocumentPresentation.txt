@@ -1,0 +1,37 @@
+Présentation du projet
+
+Sommaire :
+Ennoncer le sommaire
+
+Contexte Général :
+L'association :
+Le projet que nous devions mené à bien nous à était donné par l'association Grand Angle. Elle Gère depuis 1996 un espace d'exposition. Ces locaux sont à la point de la technologie en terme de matériel informatique. Le bâtiment est entierement équipé de points d'accès Wifi haut-débit.
+L'entreprise posséde 25 personnes dans la totalité dont 1 directeur , 2 responsables, 4 assistantes, 7 techniciens, 4 chargés de communication et 2 trductrices. Chacune de ces personnes possédent un ordinateur ou un netbook et bénéficie de la wifi haut-débit.
+
+Les besoins :
+L'association à fait appel à nous, en nous demandant de réaliser une application en intranet composé de 2 modules : un module qui permettrait de gérer toute la partie exposition et un autre qui serait sous forme de visite interactive. Il faut également que l'application soit capable de générer des QRcode ainsi que les manager. L'application doit être capable de prévenir les gestionnaire si une oeuvre n'est pas livré à une semaine de l'exposition.
+
+Module de gestion :
+Statistique des oeuvres :
+Voici un exemple de fenetre avec un design original et coloré.
+
+La demande :
+Pour le module de gestion la demande c'est précisé par rapport au besoin initial. Donc ce module devra donc contenir la gestion d'exposition avec cycle de vie (oui en effet il fallait faire en sorte que les exposition créer ne ce chevauche pas et qu'il y est 2 jour minimum de batement entre deux expositions), ainsi que la gestion des oeuvres ou la il a fallu mettre en place un systeme d'alerte pour que le gestionnaire soit avertie quand des oeuvres ne sont pas livré à une semaine de l'exposition. 
+
+Les fonctionnalités :
+Le module de gestion doit être capable d'afficher des statistiques par rapport aux nombre de vues récolter dans le second module à chaque consultation d'oeuvre ou d'exposition. Il devra être possible de gérer les oeuvre, de les imprimer ainsi que de les visualiser via un plan du bâtiment, ainsi que d'envoyer des emails pour quand une oeuvre n'est pas livré est que l'exposition est sur le point de commencer. Un système d'autentification sera requis pour se connecter à se module.
+
+Module de diffusion :
+Ceci est la page d'accueil du site de visite interactive destiné aux visiteur.
+
+La demande :
+Il nous a donc été demandé pour le module de diffusion de faire un module responsive en intranet capable de s'adapter sur tout type de format (smartphone, phablette, tablette et ordinateur). Le module doit également être accessible en plusieurs langue que le visiteur concervera même s'il sorte du site. Le site doit être également accessible via un flashcode (je m'explique, ont prend en photo un qrcode et cela nous redirige directement vers la page de l'oeuvre en question.
+
+Présenatation du groupe :
+Outils utilisés :
+Ennoncé les différents outils
+
+Volume horaire :
+Le graphique afficher représente les heures de travail actuellement passé sur le projet par rapport aux heures prévu sur le diagramme de pert.
+
+Documentations techniques :
